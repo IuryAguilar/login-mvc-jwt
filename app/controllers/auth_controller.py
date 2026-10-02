@@ -1,5 +1,7 @@
 from app.models.usuario_model import UsuarioModel
 from app.services.auth_service import AuthService
+from app.schemas.usuario_schema import Perfil
+from app.exceptions import UsuarioNaoEncontradoException
 
 class AuthController:
     def __init__(self):
@@ -56,3 +58,18 @@ class AuthController:
             "token": token,
             "mensagem": "Login bem-sucedido"
         }
+
+    def obter_perfil(self, usuario_id):
+        perfil_usuario = self.usuario_model.buscar_por_id(usuario_id)
+
+        if not perfil_usuario:
+            raise UsuarioNaoEncontradoException(
+                "Usuário não encontrado."
+            )
+
+        perfil = Perfil(
+            nome = perfil_usuario[0],
+            email = perfil_usuario[1]
+        )
+
+        return perfil

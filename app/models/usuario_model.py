@@ -33,3 +33,19 @@ class UsuarioModel:
 
         cursor.close()
         conexao.close()
+
+    def buscar_por_id(self, usuario_id):
+        conexao = conectar_banco()
+        cursor = conexao.cursor()
+
+        cursor.execute(
+            "SELECT nome, email FROM usuarios WHERE id= %s",
+            (usuario_id,)
+            )
+        
+        usuario = cursor.fetchone()
+
+        cursor.close()
+        conexao.close()
+
+        return usuario
