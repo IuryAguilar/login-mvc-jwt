@@ -20,26 +20,10 @@ class AuthController:
         }
 
     def login_usuario(self, email, senha):
-        usuario = self.usuario_model.buscar_por_email(email)
-
-        if not usuario:
-            return {
-                "sucesso": False,
-                "mensagem": "E-mail ou senha inválidos."
-            }
-
-        senha_verificada = self.auth_service.verificar_senha(
-            senha,
-            usuario[3]
+        token = self.usuario_service.logar_usuario(
+            email,
+            senha
         )
-
-        if not senha_verificada:
-            return {
-                "sucesso": False,
-                "mensagem": "E-mail ou senha inválidos."
-            }
-
-        token = self.auth_service.gerar_token(usuario[0])
 
         return {
             "sucesso": True,
@@ -48,13 +32,8 @@ class AuthController:
         }
 
     def obter_perfil(self, usuario_id):
-        perfil_usuario = self.usuario_model.buscar_por_id(usuario_id)
-
-        if not perfil_usuario:
-            raise UsuarioNaoEncontradoException(
-                "Usuário não encontrado."
-            )
-
+        perfil_usuario = self.usuario_service.buscar_usuario_por_id(usuario_id)
+        
         perfil = Perfil(
             nome = perfil_usuario[0],
             email = perfil_usuario[1]

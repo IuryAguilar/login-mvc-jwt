@@ -3,3 +3,6 @@ class UsuarioNaoEncontradoException(Exception):
 
 class UsuarioJaCadastradoException(Exception):
     pass
+
+class EmailOuSenhaInvalidoException(Exception):
+    pass
