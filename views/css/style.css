@@ -14,7 +14,7 @@ body{
     flex-direction: column;
     text-align: center;
     padding: 10px;
-    form{
+    form, #perfilInfo{
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
         padding: 10px;
         border-radius: 15px;
@@ -38,8 +38,17 @@ body{
             background-color: black;
             transform: scale(1.1);
         }
+        p{
+            margin-bottom: 10px;
+        }
     }
     a{
         color: gray;
+    }
+    #perfilInfo{
+        text-align: start;
+        span{
+            font-weight: bold;
+        }
     }
 }
