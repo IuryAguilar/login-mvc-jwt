@@ -11,11 +11,11 @@ elements.login_form.addEventListener("submit", async (event) => {
 
     elements.error_msg.textContent = "";
     
-    const email = elements.email_input.value;
-    const senha = elements.senha_input.value;
+    const email = elements.email_input.value.trim();
+    const senha = elements.senha_input.value.trim();
 
     if (!validar_email(email)) {
-        elements.error_msg.textContent = "Email inválido.";
+        elements.error_msg.textContent = "E-mail inválido.";
         return;
     };
 
